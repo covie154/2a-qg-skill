@@ -1,7 +1,7 @@
 ---
 name: 2a-sba-question-generator
 description: Use when asked to generate FRCR/FRCT Part 2A-style single-best-answer MCQs from a radiology paper (PDF, link, or pasted text). Verifies paper identity first, then builds the question.
-version: 1.2.0
+version: 1.3.0
 author: covie154
 license: MIT
 source: https://github.com/covie154/2a_qg (base/prompts.py, base/class_gen.py)
@@ -47,6 +47,18 @@ papers). Use the user's official list if they cite a different one:
 
 Even when the finder already verified the citation, **you still run your own Phase 1
 identity check independently** — do not inherit the finder's verdict.
+
+## Output modes
+
+The run produces a **question artifact file** by default (Phase 10), built from
+`templates/question-artifact-template.md` (bundled as `references/question-artifact-template.md`): question → answer → cited explanation →
+sources, with the **source document pinned as citation [1]**. Attach the file; do not also
+paste it into chat.
+
+After attaching, you may enter **quiz mode** (Phase 11): pose only the question, take the
+user's A–E, then return correct/wrong plus the cited explanation. Enter on request
+("quiz me" / "ask me the question" / "interactive") or by a single offer after the
+attachment. Never reveal the answer before they commit.
 
 ---
 
@@ -212,49 +224,78 @@ failure honestly:
 - [ ] Sources block rendered from the ledger (not retyped); ids in prose match `Citations`.
 - [ ] If web access was used at any point, each external claim is cited with its source.
 
-## PHASE 10 — OUTPUT
+## PHASE 10 — OUTPUT (the artifact is the default deliverable)
 
-Per question, emit the JSON object, then the plaintext exam card.
+**The default output of a run is one artifact FILE per question**, not chat prose. Build it
+from `templates/question-artifact-template.md` (bundled as `references/question-artifact-template.md`), write it to disk, and deliver it to the
+user (attach it in chat apps; in an agent runtime, also state the path). The chat message
+carries only a one-line summary plus the file — the file holds the question, the answer,
+and the cited explanation.
+
+Every artifact, in this order:
+1. `## Question` — stem + options A–E + "What is the most likely diagnosis?"
+2. `## Answer` — the correct letter and diagnosis name
+3. `## Explanation` — why the answer is best, plus the five-option verdict table; every
+   load-bearing claim carries a bracketed citation id
+4. `## Sources` — rendered from the ledger. **Citation [1] is the source document** the
+   question was built from: full citation + DOI/URL + retrieval date + a verbatim quote of
+   the sentence carrying the teaching point. Everything else is corroboration, numbered
+   [2], [3], …
+
+Hard rules: the answer never appears above the question line; every number in the
+explanation is sourced or marked `[unverified]`; no hand-typed URLs. File name
+`<YYYY-MM-DD>_<first-author-surname>_<subspecialty-slug>_qn<N>.md`.
+
+Also keep the machine-readable record (in the file footer or a sidecar JSON, not the chat
+body) so banks can be reprocessed:
 
 ```json
 {
-  "Source": {
-    "Title": "...", "Authors": "...", "Journal": "...", "Year": 0,
-    "DOI": "doi.org/10.xxxx/... | none found",
-    "Verified": true
-  },
+  "Source": {"Title": "...", "Authors": "...", "Journal": "...", "Year": 0,
+             "DOI": "doi.org/10.xxxx/... | none found", "Verified": true},
   "Question_Stem": "...",
-  "Options": ["A ...", "B ...", "C ...", "D ...", "E ..."],
+  "Options": ["...", "...", "...", "...", "..."],
   "Correct_Option_Index": 0,
   "Explanation": "why the answer is correct, grounded in the paper",
-  "Explanation_Other": [
-    "OptionName: why wrong", "OptionName: why wrong",
-    "OptionName: why wrong", "OptionName: why wrong"
-  ]
+  "Explanation_Other": ["Name: why wrong", "Name: why wrong", "Name: why wrong", "Name: why wrong"],
+  "Citations": {"Explanation": [["fragment", [1]], ["fragment", [2,3]]], "Explanation_Other": {"Name": [["fragment",[ids]]]}},
+  "Sources": [{"id": 1, "title": "<source document>", "url": "...", "retrieved": "DD-MM-YYYY", "quotes": ["verbatim"]}],
+  "Citation_Audit": {"coverage": 0.0, "min_required": 0.6, "pass": true, "unverified_claims": 0, "dead_ends": []},
+  "Notes": []
 }
 ```
 
-Plaintext card:
+The artifact is the attachment. Do not paste the whole artifact into the chat as well —
+that duplicates it and hides the file.
 
-```
-<Question_Stem>
+## PHASE 11 — QUIZ MODE (interactive self-test)
 
-A. <option>
-B. <option>
-C. <option>
-D. <option>
-E. <option>
+Two ways to enter quiz mode:
+- **User-requested:** the user says "quiz me", "ask me the question", "interactive",
+  "don't show me the answer" → go straight to the quiz flow.
+- **Offered:** after you attach the full artifact, ASK ONCE whether they'd like to be
+  posed the question before seeing the answer. If they decline or don't reply, stop — the
+  artifact already stands on its own. Do not push it twice.
 
-******************************************
+Quiz flow, once entered:
+1. Emit a **QUIZ artifact** (same file, `_QUIZ` suffix) and/or post in chat containing
+   ONLY the stem, options A–E, and the question line — no answer, no explanation, no
+   spoiler-bearing sources list. Hold the answer key in your working context.
+2. Ask the user to reply with a single letter (A–E). Wait; do not answer for them.
+3. On their reply, judge it against the held key and respond:
+   - correct → "**Correct.** <diagnosis>" then the full cited explanation + Sources block.
+   - wrong → "**Not quite — the best answer is <letter>, <diagnosis>.**" then the full
+     cited explanation, and specifically why *their* chosen option is falsifiable by a
+     stated stem feature (use that option's row from the verdict table).
+   - unrecognised input (not A–E, or blank) → re-ask once, clarifying the format; do not
+     guess their intent.
+4. Reveal nothing about the answer before they commit. A user who asks for a hint mid-quiz
+   may get one *nudge* toward a stem feature, never the diagnosis name.
 
-Correct Option: <letter>
-
-Explanation:
-<Explanation>
-
-<DistractorName>: <why wrong>
-...
-```
+Multi-question runs: quiz them one at a time — present Q1, take the answer, give the
+verdict and explanation, then move to Q2. Track the running score only if the user is
+clearly doing a self-assessment session; report it at the end, unprompted narration
+between questions is noise.
 
 ---
 

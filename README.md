@@ -74,7 +74,7 @@ Then say *"make me 3 2A questions from <paper>"* or *"surprise me"*.
 .
 ├── skills/
 │   ├── 2a-sba-question-generator/
-│   │   ├── SKILL.md                    full 10-phase spec + gates
+│   │   ├── SKILL.md                    full 11-phase spec + gates
 │   │   └── references/                 paste-in copies + worked sample
 │   └── 2a-surprise-me-paper-finder/
 │       ├── SKILL.md                    finder procedure + full-text gate
@@ -82,14 +82,30 @@ Then say *"make me 3 2A questions from <paper>"* or *"surprise me"*.
 ├── prompts/                            paste-ready system prompts (no frontmatter)
 │   ├── generator-system-prompt.md
 │   └── surprise-me-system-prompt.md
+├── templates/
+│   └── question-artifact-template.md   the default deliverable: Q -> A -> cited explanation -> sources
 ├── examples/
-│   └── sample-output.md                real run: receipt, ledger, JSON, exam card
+│   ├── sample-output.md                full run trace: receipt, ledger, JSON, audit
+│   ├── example-artifact.md             a delivered artifact (citation [1] = the source paper)
+│   └── example-quiz.md                 the quiz variant — question only, key withheld
 ├── data/
 │   └── used_papers.md                  novelty log + rejected-paper audit trail
 ├── README.md
 ├── LICENSE
 └── CONTRIBUTING.md
 ```
+
+## Delivery: artifact, then optional quiz
+
+Every run writes **one artifact file per question** — `## Question`, `## Answer`,
+`## Explanation`, `## Sources`, with the **source document pinned as citation [1]** and a
+verbatim quote of the sentence carrying the teaching point. The file is the attachment;
+the chat carries only a one-line summary.
+
+Then, on request (*"quiz me"*, *"ask me the question"*, *"interactive"*) or a single offer
+after the attachment, **quiz mode** poses the question alone, takes your A–E, and returns
+correct/wrong plus the cited explanation. The key is held until you commit; a mid-quiz hint
+nudges one stem feature, never the diagnosis.
 
 ---
 

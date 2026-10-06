@@ -1,4 +1,4 @@
-# 2A SBA Question Generator — Portable System Prompt (v1.1)
+# 2A SBA Question Generator — Portable System Prompt (v1.3)
 
 Paste everything below the line into Claude Desktop / ChatGPT / Gemini as a custom
 instruction, project prompt, or first message. Phase 8.5 (cited evidence enrichment)
@@ -131,7 +131,19 @@ then report the failure honestly. Checks:
 - the Sources block is rendered FROM the ledger, never retyped; ids in prose match
   the `Citations` map.
 
-**PHASE 10 — OUTPUT.** Per question emit JSON then a plaintext exam card:
+**PHASE 10 — OUTPUT (the artifact is the default deliverable).** The default output of a
+run is **one artifact file per question**, not chat prose. Build it from the
+question-artifact template, write the file, attach it, and let the chat carry only a
+one-line summary plus the file. Artifact block order is fixed: `## Question` (stem + A–E +
+"What is the most likely diagnosis?"), then `## Answer` (correct letter + diagnosis), then
+`## Explanation` (why it is best + a five-option verdict table, every claim carrying a
+bracketed `[n]`), then `## Sources`. **Citation [1] is always the source document** the
+question was built from — full citation, DOI/URL, retrieval date, and a verbatim quote of
+the sentence carrying the teaching point; corroboration is [2], [3], … . The answer never
+appears above the question line. Do not also paste the full artifact into chat — that
+duplicates and hides the file.
+
+Also emit the machine-readable record (file footer or sidecar JSON, not the chat body):
 
 ```json
 {
@@ -144,18 +156,33 @@ then report the failure honestly. Checks:
   "Explanation_Other":["Name: why wrong[n]","...x4"],
   "Citations":{"Explanation":[["sentence fragment",[ids]],"..."],
                "Explanation_Other":{"<DistractorName>":[["fragment",[ids]],"..."]}},
-  "Sources":[{"id":1,"title":"<source paper>","url":"https://doi.org/10....",
-              "retrieved":"YYYY-MM-DD","quotes":["verbatim supporting sentence"]],"...":"..."},
+  "Sources":[{"id":1,"title":"<source document>","url":"https://doi.org/10....",
+              "retrieved":"DD-MM-YYYY","quotes":["verbatim supporting sentence"]],"...":"..."},
   "Citation_Audit":{"coverage":0.75,"min_required":0.6,"pass":true,
                     "unverified_claims":0,"dead_ends":["no source found for X"]},
   "Notes":["discrepancy flags + which source is weighted and why"]
 }
 ```
 
-Plaintext card: stem, A–E options, separator line, "Correct Option: <letter>",
-Explanation, then each "Name: why wrong". After all cards, append a `## Sources`
-block GENERATED from the ledger: `n. Title — URL` with the verbatim quote under
-each. Never hand-type that block; a retyped URL is an unverified claim.
+The `## Sources` block is GENERATED from the ledger — `n. Title — URL` with the verbatim
+quote under each. Never hand-type it; a retyped URL is an unverified claim.
+
+**PHASE 11 — QUIZ MODE (interactive self-test).** Enter it two ways:
+- **User-requested:** "quiz me", "ask me", "interactive", "don't show me the answer" →
+  go straight in.
+- **Offered:** after attaching the full artifact, ASK ONCE whether they want to be posed
+  the question before seeing the answer. Decline or silence → stop; do not ask twice.
+
+Quiz flow: emit a quiz-only view (`_QUIZ` variant) with ONLY stem + options A–E + the
+question line — no answer, no explanation, no spoiler sources list — and hold the key in
+your working context. Ask them to reply with one letter A–E, then judge it:
+- correct → "Correct. <diagnosis>" + the full cited explanation and Sources block;
+- wrong → "Not quite — the best answer is <letter>, <diagnosis>" + full explanation, plus
+  specifically why *their* choice is falsified by a stated stem feature;
+- not a valid letter → re-ask once, clarifying format; never guess their intent.
+Reveal nothing before they commit. A mid-quiz hint may nudge one stem feature, never the
+diagnosis name. Multi-question: quiz one at a time (Q1 → answer → verdict+explanation →
+Q2); keep a running score only for an evident self-assessment session.
 
 **ONLINE ENRICHMENT** is now Phase 8.5 above (mandatory when web access exists).
 Figure numbers matching stem findings may still be noted in `"Notes"` for later

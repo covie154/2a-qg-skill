@@ -3,6 +3,29 @@
 All notable changes to these skills. Versions are shared across the generator and finder
 so the paired prompts always travel togetha.
 
+## [1.3.0] — 07-10-2026
+
+### Added
+- **Artifact-first delivery (Phase 10).** The default output of a run is one markdown
+  artifact file per question — `## Question` → `## Answer` → `## Explanation` → `## Sources`
+  — attached as the deliverable, with the chat carrying only a one-line summary. New
+  `templates/question-artifact-template.md` defines the block order and hard rules.
+- **Source document pinned as citation [1].** The paper the question was built from always
+  renders first in `Sources`, with its DOI/URL, retrieval date, and a verbatim quote of the
+  sentence carrying the teaching point; corroboration is numbered [2], [3], …
+- **Quiz mode (Phase 11).** An interactive self-test: pose the question alone, take the
+  user's A–E, then return correct/wrong plus the cited explanation. Entered on request
+  ("quiz me" / "ask me the question" / "interactive") or a single offer after the artifact
+  is attached — never pushed twice, never reveals the key before the user commits.
+  `examples/example-quiz.md` shows the leak-free quiz variant.
+- Worked deliverable samples: `examples/example-artifact.md` (full cited artifact) and
+  `examples/example-quiz.md` (quiz view).
+
+### Changed
+- `## Answer` is now a first-class block and is barred from appearing above the question
+  line, so a reader can self-test before scrolling.
+- The five-option verdict table is the canonical form of the per-option explanation.
+
 ## [1.2.1] — 06-10-2026
 
 ### Added
