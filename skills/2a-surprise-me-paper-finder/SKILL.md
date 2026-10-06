@@ -3,7 +3,7 @@ name: 2a-surprise-me-paper-finder
 description: Use when picking a paper for 2A question generation.
 version: 1.1.0
 author: covie154
-license: MIT
+license: CC-BY-NC-SA-4.0 (commercial license reserved to the author)
 metadata:
   hermes:
     tags: [radiology, frcr-2a, paper-discovery, companion-skill, web-search]

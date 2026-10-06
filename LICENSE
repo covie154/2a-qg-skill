@@ -1,28 +1,71 @@
-MIT License
+# License
 
-Copyright (c) 2026 Covie
+Copyright (c) 2026 Covie. All rights reserved except where expressly granted below.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of
-this software and associated documentation files (the "Software"), to deal in the
-Software without restriction, including without limitation the rights to use, copy,
-modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
-and to permit persons to whom the Software is furnished to do so, subject to the
-following conditions:
+This work is offered under a **dual-license** model:
 
-The above copyright notice and this permission notice shall be included in all copies
-or substantial portions of the Software.
+1. **Open grant — Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
+   (CC BY-NC-SA 4.0).** Anyone may copy, redistribute, adapt, and build on these skills for
+   **non-commercial** purposes, giving attribution, provided every derivative is released
+   under the same (or a Creative-Commons-listed compatible) license.
+2. **Commercial grant — reserved to the copyright holder.** Any use that is *not* NonCommercial
+   is **outside** the open grant and requires a separate written commercial license from Covie.
+   Nothing in the open grant permits selling, reselling, bundling into a paid product, running
+   behind a subscription, embedding in a commercial service, or using the material to train or
+   power a commercial model/product without that separate license.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
-PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
-CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
-OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+## How to apply the open grant
+
+> This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0
+> International Public License. To view a copy of this license, visit
+> <https://creativecommons.org/licenses/by-nc-sa/4.0/> or send a letter to
+> Creative Commons, PO Box 1866, Mountain View, CA 94040 USA.
+
+The **canonical legal code at that URL is the operative license text** and governs all terms
+(definitions, scope, the Attribution condition, the NonCommercial limitation, the ShareAlike
+condition, term, termination, and warranty disclaimers). It is deliberately not restated here so
+that this file can never drift from CC's official text. The human-readable **Shared-Starter
+License deed** is at <https://creativecommons.org/licenses/by-nc-sa/4.0/?deed.en>.
+
+## What the open grant does and does not cover
+
+- **Covered:** your use of the prompt engineering, phase/gate procedures, the question-artifact
+  template, the citation-ledger contract, and all original written content in this repository.
+- **Attribution (the "BY"):** keep the copyright notice and license notice intact, and state what
+  you changed. Credit line: *"Built on the 2A SBA Question-Generator skill by Covie, licensed
+  CC BY-NC-SA 4.0."*
+- **ShareAlike (the "SA"):** adaptations, derivative skills, remixes, and any question bank that
+  incorporates this material must carry the same CC BY-NC-SA 4.0 license — so a derivative stays
+  open and non-commercial too.
+- **NonCommercial (the "NC"):** "NonCommercial" means not primarily intended for or directed
+  toward commercial advantage or monetary compensation. The NC boundary is judged per use, and the
+  license's §2(a)(2) preserves anything already allowed by an exception or limitation to copyright
+  (e.g. fair use / fair dealing) — those uses sit outside the license and are not restricted by it.
+- **Reserved to Covie:** Covie holds the copyright and is **not** bound by the NonCommercial
+  limitation against himself. Under §6 of the same license, the licensor may offer the same material
+  under **separate (including commercial) terms at any time** without withdrawing the open grant.
+  Commercial licensing contact: open an issue on the repository, or reach Covie directly.
+
+## No warranty
+
+The material is provided "as-is", with no warranty of any kind, express or implied. It generates
+educational exam-style questions for **FRCR Part 2A revision**. It is **not** medical advice and must
+not be used for clinical decisions.
 
 ---
 
-Note on scope: this license covers the prompt text, skill definitions, and supporting
-documentation in this repository. It does not cover examination content belonging to the
-Royal College of Radiologists, nor the copyrighted full texts of any journal articles the
-skills may process. Journal article use remains subject to the publisher's license and the
-reader's own access rights.
+**Note on scope (third-party content, NOT under this license).** This license covers the prompt
+text, skill definitions, templates, and supporting documentation authored by Covie in this
+repository. It does not cover examination content belonging to the Royal College of Radiologists,
+nor the copyrighted full texts of any journal articles the skills may process. Generated artifacts
+quote source-paper text verbatim under the skill's full-text gate; those passages remain the
+copyright of their publishers and authors (RSNA, *RadioGraphics*, Elsevier, society journals, and
+the like). Most PMC/open-access copies carry their own terms (often CC BY). Journal-article use
+remains subject to the publisher's license and the reader's own access rights; do not assume a
+quoted figure, table, or sentence here is free to republish.
+
+```
+SPDX-Identifier:   CC-BY-NC-SA-4.0
+Canonical-URL:     https://creativecommons.org/licenses/by-nc-sa/4.0/
+Commercial-License: reserved to Covie (contact via the repository)
+```

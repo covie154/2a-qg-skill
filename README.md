@@ -236,5 +236,16 @@ Contributions welcome — see `CONTRIBUTING.md`.
 
 ## Licence
 
-MIT — see `LICENSE`. Text content and prompts; no medical advice, exam material is for
-revision practice and remains the property of the RCR.
+**Dual-licensed.** Copyright (c) 2026 Covie — see `LICENSE` for full terms.
+
+- **Open, non-commercial use:** Creative Commons **BY-NC-SA 4.0**
+  (<https://creativecommons.org/licenses/by-nc-sa/4.0/>). Free to use, share, and adapt with
+  attribution, as long as the use is non-commercial **and** derivatives carry the same license.
+- **Commercial use is reserved.** Selling, bundling into a paid product, running behind a
+  subscription, embedding in a commercial service, or using it to power/train a commercial
+  product needs a separate commercial license from Covie. You may not commercialise this work;
+  the author may.
+
+Text content and prompts; no medical advice. Exam material is for revision practice and remains
+the property of the RCR. Generated artifacts quote source-paper text verbatim — those passages stay
+with their publishers and carry the source paper's own license.

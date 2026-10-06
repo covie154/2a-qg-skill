@@ -3,7 +3,7 @@ name: 2a-sba-question-generator
 description: Use when asked to generate FRCR/FRCT Part 2A-style single-best-answer MCQs from a radiology paper (PDF, link, or pasted text). Verifies paper identity first, then builds the question.
 version: 1.3.0
 author: covie154
-license: MIT
+license: CC-BY-NC-SA-4.0 (commercial license reserved to the author)
 source: https://github.com/covie154/2a_qg (base/prompts.py, base/class_gen.py)
 portable: true   # self-contained prompt; runs in Claude Desktop, ChatGPT, Gemini, or any agent with web access
 ---

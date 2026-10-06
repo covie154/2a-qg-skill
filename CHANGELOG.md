@@ -22,6 +22,12 @@ so the paired prompts always travel togetha.
   `examples/example-quiz.md` (quiz view).
 
 ### Changed
+- **Licence moved to dual-licence.** Open non-commercial use is now **CC BY-NC-SA 4.0**
+  (attribution required, derivatives share-alike); **all commercial rights are reserved to
+  Covie** and require a separate written commercial licence. The prior MIT grant, which allowed
+  anyone (including closed-source resellers) to commercialise the work, is withdrawn. Applied
+  across `LICENSE`, `README.md`, and both `SKILL.md` frontmatter blocks; the third-party
+  publisher/RCR carve-out is preserved.
 - `## Answer` is now a first-class block and is barred from appearing above the question
   line, so a reader can self-test before scrolling.
 - The five-option verdict table is the canonical form of the per-option explanation.
@@ -29,7 +35,7 @@ so the paired prompts always travel togetha.
 ## [1.2.1] — 06-10-2026
 
 ### Added
-- `README.md`, `CONTRIBUTING.md`, `CHANGELOG.md`, `.gitignore`, `LICENSE` (MIT).
+- `README.md`, `CONTRIBUTING.md`, `CHANGELOG.md`, `.gitignore`, `LICENSE`.
 - Repository layout split into `skills/`, `prompts/`, `examples/`, `data/`.
 - Rejected-paper audit trail in `data/used_papers.md` (separate from handoffs).
 
