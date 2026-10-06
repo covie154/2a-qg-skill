@@ -1,0 +1,17 @@
+# Local runs and personal history — not for the shared repo
+used_papers.local.md
+*.local.md
+
+# Agent/editor scratch
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.idea/
+.vscode/
+
+# Never stage journal article full text — identify papers by DOI/PMCID only
+*.pdf
+*_fulltext*
+*_extract*.txt
+*_extract*.md
